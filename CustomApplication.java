@@ -8,14 +8,14 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class CustomApplication extends Application {
 
-    private static int frageIndex =1;
+    private  int frageIndex =1;
 
-    public static int getFrageIndex() {
+    public  int getFrageIndex() {
         return frageIndex;
     }
 
-    public static void setFrageIndex(int frageIndex) {
-        CustomApplication.frageIndex = frageIndex;
+    public  void setFrageIndex(int frageIndex) {
+        this.frageIndex = frageIndex;
     }
 
     private static CustomApplication app;

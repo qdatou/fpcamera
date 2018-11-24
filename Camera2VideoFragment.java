@@ -321,7 +321,7 @@ public class Camera2VideoFragment extends Fragment
             }
             case R.id.info2: {
                 Activity activity = getActivity();
-                CustomApplication.setFrageIndex(1);
+                CustomApplication.getApp().setFrageIndex(1);
                 if (null != activity) {
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, Camera2RawFragment.newInstance())

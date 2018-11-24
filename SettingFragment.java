@@ -58,7 +58,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    if(CustomApplication.getFrageIndex() == 1){
+                    if(CustomApplication.getApp().getFrageIndex() == 1){
                         Activity activity = getActivity();
                         if (null != activity) {
                             getFragmentManager().beginTransaction()
@@ -89,7 +89,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.setback:{
                 try {
-                    if (CustomApplication.getFrageIndex() == 1) {
+                    if (CustomApplication.getApp().getFrageIndex() == 1) {
                         Activity activity = getActivity();
                         if (null != activity) {
                             getFragmentManager().beginTransaction()

@@ -77,6 +77,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,6 +140,7 @@ public class Camera2RawFragment extends Fragment
      * Conversion from screen rotation to JPEG orientation.
      */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    private SeekBar zoombar = null;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
@@ -653,10 +655,13 @@ public class Camera2RawFragment extends Fragment
         view.findViewById(R.id.info).setOnClickListener(this);
         view.findViewById(R.id.preview).setOnClickListener(this);
         view.findViewById(R.id.set).setOnClickListener(this);
+        view.findViewById(R.id.zoombig).setOnClickListener(this);
+        view.findViewById(R.id.zoomsmall).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         mReceiver = new BatteryBroadCastRec();
         this.batView = (TextView)view.findViewById(R.id.batTxt);
-
+        zoombar = view.findViewById(R.id.zoomBar);
+        zoombar.setRotation(270);
         // Setup a new OrientationEventListener.  This is used to handle rotation events like a
         // 180 degree rotation that do not normally trigger a call to onCreate to do view re-layout
         // or otherwise cause the preview TextureView's size to change.
@@ -733,7 +738,6 @@ public class Camera2RawFragment extends Fragment
             case R.id.set: {
                 Intent intent = new Intent(getActivity().getApplicationContext(),SettingsActivity.class);
                 startActivity(intent);
-
 //                Activity activity = getActivity();
 //                if (null != activity) {
 //                    getFragmentManager().beginTransaction()
@@ -748,11 +752,31 @@ public class Camera2RawFragment extends Fragment
             }
             case R.id.info: {
                 Activity activity = getActivity();
-                CustomApplication.setFrageIndex(2);
+                CustomApplication.getApp().setFrageIndex(2);
                 if (null != activity) {
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, Camera2VideoFragment.newInstance())
                             .commit();
+                }
+                break;
+            }
+            case R.id.zoombig: {
+                //SeekBar sb = view.findViewById(R.id.zoomBar);
+                int now = zoombar.getProgress();
+                if((now+5)>100){
+                    zoombar.setProgress(100);
+                }else{
+                    zoombar.setProgress(now+5);
+                }
+                break;
+            }
+            case R.id.zoomsmall: {
+                //SeekBar sb = view.findViewById(R.id.zoomBar);
+                int now = zoombar.getProgress();
+                if((now-5)<0){
+                    zoombar.setProgress(0);
+                }else{
+                    zoombar.setProgress(now-5);
                 }
                 break;
             }
